@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),  # Include blog app URLs
+    path("webauthn/", include("django_otp_webauthn.urls", namespace="otp_webauthn")),
 ]
