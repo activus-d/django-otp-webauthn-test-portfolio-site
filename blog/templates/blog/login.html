@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load otp_webauthn %}
+
+{% block content %}
+  <h2>Login</h2>
+  <form method="post" action="{% url 'blog:login' %}">
+      {% csrf_token %}
+      <label for="id_username">Username:</label>
+      <input type="text" name="username" id="id_username" autocomplete="username"><br>
+      <label for="id_password">Password:</label>
+      <input type="password" name="password" id="id_password" autocomplete="current-password"><br>
+      <button type="submit">Login</button>
+  </form>
+
+  <span id="passkey-verification-placeholder"></span>
+
+  <template id="passkey-verification-available-template">
+      <button type="button" id="passkey-verification-button">Login using a Passkey</button>
+      <div id="passkey-verification-status-message"></div>
+  </template>
+
+  <template id="passkey-verification-unavailable-template">
+      <p>Sorry, your browser has no Passkey support</p>
+  </template>
+
+  {% render_otp_webauthn_auth_scripts username_field_selector="input[name='username']" %}
+{% endblock %}

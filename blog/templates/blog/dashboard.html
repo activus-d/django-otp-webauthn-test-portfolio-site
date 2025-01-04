@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load otp_webauthn %}
+
+{% block content %}
+  <h2>Dashboard</h2>
+  <p>Welcome, {{ user.username }}!</p>
+
+  <span id="passkey-registration-placeholder"></span>
+
+  <template id="passkey-registration-available-template">
+      <div>
+          <button type="button" id="passkey-register-button">Register Passkey</button>
+          <div id="passkey-register-status-message"></div>
+      </div>
+  </template>
+
+  <template id="passkey-registration-unavailable-template">
+      <p>Sorry, your browser has no Passkey support</p>
+  </template>
+
+  {% render_otp_webauthn_register_scripts %}
+{% endblock %}
