@@ -43,13 +43,11 @@ INSTALLED_APPS = [
 ]
 
 OTP_WEBAUTHN_RP_NAME = "My Website Inc."
-OTP_WEBAUTHN_RP_ID = "your-domain.com"
-OTP_WEBAUTHN_ALLOWED_ORIGINS = [
-    "https://your-domain.com",
-    "https://subdomain.your-domain.com"
-]
+OTP_WEBAUTHN_RP_ID = "localhost"
+OTP_WEBAUTHN_ALLOWED_ORIGINS = ["http://localhost:8000"]
 
 AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",  # This is Django's default backend, you likely want to keep it.
     "django_otp_webauthn.backends.WebAuthnBackend",
 ]
 
